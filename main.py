@@ -79,5 +79,25 @@ def search_by_rating_view(rating):
     )
 
 
+@app.get("/genre/<genre>/")
+def search_by_genre_view(genre):
+    sql = f"""
+    select *
+    from netflix
+    where listed_in like '%{genre}'
+    order by release_year desc
+    limit 10
+    """
+
+    result = []
+
+    for item in get_value_from_db(sql=sql):
+        result.append(dict(item))
+    return app.response_class(
+        response=json.dumps(result, ensure_ascii=False, indent=4),
+        status=200,
+        mimetype="application/json"
+    )
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)

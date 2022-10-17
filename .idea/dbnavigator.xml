@@ -53,7 +53,13 @@ limit 100
 
 select title, rating, description
 from netflix
-where rating = 'G']]></console>
+where rating = 'G'
+
+select *
+from netflix
+where listed_in like '%dramas'
+order by release_year desc
+limit 10]]></console>
       <console name="netflix" type="STANDARD" schema="main" session="Main"><![CDATA[select * from netflix]]></console>
     </connection>
   </component>
