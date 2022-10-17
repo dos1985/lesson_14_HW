@@ -49,7 +49,11 @@ limit 1
 select title, release_year
 from netflix
 where release_year between '2021' and '2022'
-limit 100]]></console>
+limit 100
+
+select title, rating, description
+from netflix
+where rating = 'G']]></console>
       <console name="netflix" type="STANDARD" schema="main" session="Main"><![CDATA[select * from netflix]]></console>
     </connection>
   </component>

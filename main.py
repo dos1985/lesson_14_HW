@@ -24,7 +24,7 @@ def search_by_title(title):
         return dict(item)
 
 
-@app.get("/movie/<title>")
+@app.get("/movie/<title>/")
 def search_by_title_view(title):
     result = search_by_title(title=title)
     return app.response_class(
@@ -33,7 +33,9 @@ def search_by_title_view(title):
         mimetype="application/json"
 
     )
-@app.get("/movie/<year1>/to/<year2>")
+
+
+@app.get("/movie/<year1>/to/<year2>/")
 def search_by_date_view(year1, year2):
     sql = f"""select title, release_year
              from netflix
@@ -43,7 +45,7 @@ def search_by_date_view(year1, year2):
 
     result = []
 
-    for item in get_value_from_db(sql):
+    for item in get_value_from_db(sql=sql):
         result.append(dict(item))
     return app.response_class(
         response=json.dumps(result, ensure_ascii=False, indent=4),
@@ -51,6 +53,30 @@ def search_by_date_view(year1, year2):
         mimetype="application/json"
     )
 
+
+@app.get("/rating/<rating>/")
+def search_by_rating_view(rating):
+    my_dict = {
+        "children": ("G", "G"),
+        "family": ("G", "PG", "PG-13"),
+        "adult": ("R", "NC-17")
+    }
+
+    sql = f"""
+    select title, rating, description
+    from netflix
+    where rating in {my_dict.get(rating, ("R", "R"))} 
+"""
+
+    result = []
+
+    for item in get_value_from_db(sql=sql):
+        result.append(dict(item))
+    return app.response_class(
+        response=json.dumps(result, ensure_ascii=False, indent=4),
+        status=200,
+        mimetype="application/json"
+    )
 
 
 if __name__ == '__main__':
