@@ -28,7 +28,7 @@ def search_by_title(title):
 def search_by_title_view(title):
     result = search_by_title(title=title)
     return app.response_class(
-        response=json.dump(result, ensure_ascii=False, indent=4),
+        response=json.dumps(result, ensure_ascii=False, indent=4),
         status=200,
         mimetype="application/json"
 
