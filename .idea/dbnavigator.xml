@@ -44,7 +44,12 @@ select *
 from netflix
 where title = '#Roxy'
 order by release_year desc
-limit 1]]></console>
+limit 1
+
+select title, release_year
+from netflix
+where release_year between '2021' and '2022'
+limit 100]]></console>
       <console name="netflix" type="STANDARD" schema="main" session="Main"><![CDATA[select * from netflix]]></console>
     </connection>
   </component>
