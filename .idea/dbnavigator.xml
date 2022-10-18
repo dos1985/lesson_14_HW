@@ -64,7 +64,13 @@ limit 10
 
 select "cast"
 from netflix
-where "cast" like '%Rose McIver%' and "cast" like '%Ben Lamb%']]></console>
+where "cast" like '%Rose McIver%' and "cast" like '%Ben Lamb%'
+
+select title, description, listed_in
+from netflix
+where type = 'Movie' 
+and release_year = '2021'
+and listed_in like '%Documentaries%']]></console>
       <console name="netflix" type="STANDARD" schema="main" session="Main"><![CDATA[select * from netflix]]></console>
     </connection>
   </component>

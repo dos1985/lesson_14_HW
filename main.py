@@ -126,8 +126,26 @@ def search_double_name(name1, name2):
     return result
 
 
+def step_6(typ, year, genre):
+    sql = f"""
+    select title, description, listed_in
+    from netflix
+    where type = '{typ}' 
+    and release_year = '{year}'
+    and listed_in like '{genre}'
+    """
+
+    result = []
+
+    for item in get_value_from_db(sql):
+        result.append(dict(item))
+
+    return json.dumps(result, ensure_ascii=False, indent=4)
+
+
 if __name__ == '__main__':
     print(search_double_name('Rose McIver', 'Ben Lamb'))
+    print(step_6('Movie', '2021', 'Documentaries'))
 
 
     # app.run(debug=True, host='0.0.0.0', port=8080)
