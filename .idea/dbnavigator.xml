@@ -59,7 +59,12 @@ select *
 from netflix
 where listed_in like '%dramas'
 order by release_year desc
-limit 10]]></console>
+limit 10
+
+
+select "cast"
+from netflix
+where "cast" like '%Rose McIver%' and "cast" like '%Ben Lamb%']]></console>
       <console name="netflix" type="STANDARD" schema="main" session="Main"><![CDATA[select * from netflix]]></console>
     </connection>
   </component>

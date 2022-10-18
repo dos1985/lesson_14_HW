@@ -99,5 +99,35 @@ def search_by_genre_view(genre):
         mimetype="application/json"
     )
 
+
+
+
+def search_double_name(name1, name2):
+    sql = f"""
+    select "cast"
+    from netflix
+    where "cast" like '%{name1}%'
+    and "cast" like '%{name2}%'
+    """
+
+    names_dict = {}
+
+    result = []
+    for item in get_value_from_db(sql=sql):
+        names = set(dict(item).get('cast').split(",")) - set([name1, name2])
+
+        for name in names:
+            names_dict[str(name).strip()] = names_dict.get(str(name).strip(), 0) + 1
+
+    for key, value in names_dict.items():
+        if value >= 2:
+            result.append(key)
+
+    return result
+
+
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8080)
+    print(search_double_name('Rose McIver', 'Ben Lamb'))
+
+
+    # app.run(debug=True, host='0.0.0.0', port=8080)
