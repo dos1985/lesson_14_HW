@@ -33,7 +33,7 @@
 
 select * 
 from netflix
-where title = '#Roxy'
+where title
 and release_year =
 (select max(release_year)
  from netflix

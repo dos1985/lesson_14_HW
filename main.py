@@ -15,7 +15,7 @@ def get_value_from_db(sql):
 def search_by_title(title):
     sql = f"""select * 
             from netflix
-            where title = '#Roxy'
+            where title = '{title}'
             order by release_year desc
             
     """
@@ -84,7 +84,7 @@ def search_by_genre_view(genre):
     sql = f"""
     select *
     from netflix
-    where listed_in like '%{genre}'
+    where listed_in like '%{genre}%'
     order by release_year desc
     limit 10
     """
@@ -148,4 +148,4 @@ if __name__ == '__main__':
     print(step_6('Movie', '2021', 'Documentaries'))
 
 
-    # app.run(debug=True, host='0.0.0.0', port=8080)
+    app.run(debug=True, host='0.0.0.0', port=8080)
